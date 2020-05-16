@@ -361,7 +361,7 @@ function test(b){
 
 function main(){
 	var b;
-	var args;
+	var args = [];
 	var formuleF = document.getElementById("input").value;
 	mas = [];
 	b = checkFormule(formuleF);
@@ -369,14 +369,18 @@ function main(){
 		document.getElementById("output").innerHTML = "Формула записана не верно";
 		return;
 	}
-
 	args = getArgs(formuleF);
-	createTable(args);
-	changeArguments(formuleF, args, 0, 1);
+	if(args.length == 0){
+		mas.push(check(formuleF));
+	}
+	else{
+		createTable(args);
+		changeArguments(formuleF, args, 0, 1);
+	}
 	b = checkimpl(); 
 	if (b) document.getElementById("output").innerHTML = "Выполнимая";
 	else document.getElementById("output").innerHTML = "Невыполнимая";
-	fillTable(args);
+	if (args.length != 0) fillTable(args);
 	return;
 }
 
